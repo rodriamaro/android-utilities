@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>co.bitcode.android</groupId>
+    <artifactId>utilities</artifactId>
+    <name>Android Utilities</name>
+    <packaging>apk</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src</sourceDirectory>
+        <plugins>
+            <!-- Android Maven Plugin -->
+            <plugin>
+                <artifactId>android-maven-plugin</artifactId>
+                <groupId>co.bitcode</groupId>
+                <version>0.0.2-SNAPSHOT</version>
+                <extensions>true</extensions>
+            </plugin>
+            <!-- Manage license comments -->
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.8.0</version>
+                <configuration>
+                    <header>HEADER</header>
+                    <excludes>
+                        <exclude>src/**/Eula.java</exclude>
+                    </excludes>
+                    <includes>
+                        <include>src/**/*.java</include>
+                        <include>res/**/*.xml</include>
+                    </includes>
+                    <mapping>
+                        <java>SLASHSTAR_STYLE</java>
+                    </mapping>
+                    <strictCheck>true</strictCheck>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

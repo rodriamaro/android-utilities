@@ -1,0 +1,58 @@
+Code Style
+----------
+
+The rules below are not guidelines or recommendations, but strict
+rules.
+
+Not all existing code follows these rules, but all new code is expected to.
+
+These rules are based upon "Android Code Style Guidelines"¹ (which are in turn
+based upon "Code Conventions for the Java Programming Language"²). Please read
+them accounting for the following exceptions/integrations:
+
+
+
+Import ordering
+~~~~~~~~~~~~~~~
+
+The ordering of import statements is:
+
+* java and javax (core libraries)
+* Android imports (core platform libraries)
+* Imports from third parties (co, com, junit, net, org)
+* Local imports (i.e.: coming from below the current application package root)
+
+To exactly match the IDE settings, the imports should be:
+
+* Alphabetical within each grouping.
+* Capital letters are considered to come before lower case letter (e.g. Z before a).
+* There should be a blank line between each major grouping (android, java, javax, com, junit, net,
+  org).
+  
+Please avoid static imports.
+
+
+
+Variable declaration
+~~~~~~~~~~~~~~~~~~~~
+
+Always declare (but DO NOT INITIALIZE) all variables you intend to use at the
+beginning of the block.
+
+The same applies to instance variables, which are declared and then initialized
+in constructors.
+
+Only static and final variables can be declared and initialized at the same
+time.
+
+This style resembles Pascal "var" section or Haskell's "where". It is also used
+throughout Apple's XNU code-base.
+
+
+
+
+Footnotes
+---------
+
+1. http://source.android.com/source/code-style.html
+2. http://java.sun.com/docs/codeconv/html/CodeConvTOC.doc.html
