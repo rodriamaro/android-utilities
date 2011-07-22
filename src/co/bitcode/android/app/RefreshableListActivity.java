@@ -29,6 +29,14 @@ import co.bitcode.android.R;
  * @author Lorenzo Villani
  */
 public abstract class RefreshableListActivity extends ListActivity {
+    private boolean mFirstTime;
+    
+    public RefreshableListActivity() {
+        super();
+        
+        mFirstTime = true;
+    }
+    
     /**
      * Inflates the options menu.
      */
@@ -57,8 +65,24 @@ public abstract class RefreshableListActivity extends ListActivity {
     /**
      * Subclasses must implement this method to handle the "Refresh" menu item.
      * 
+     * <p>
+     * This method is automatically invoked the first time this Activity is shown to the user.
+     * </p>
+     * 
      * @param forced True if we forced a refresh via the menu item.
      * @since 0.0.1
      */
     public abstract void refresh(boolean forced);
+    
+    /**
+     * Invokes {@link #refresh(boolean)} the first time this Activity is shown.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        
+        if (mFirstTime) {
+            refresh(true);
+        }
+    }
 }
