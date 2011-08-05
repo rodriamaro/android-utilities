@@ -38,7 +38,7 @@ public class LocationHelper {
 
             location = locationManager.getLastKnownLocation(provider);
 
-            if (isBetterLocation(location, bestLocation)) {
+            if ((location != null) && isBetterLocation(location, bestLocation)) {
                 bestLocation = location;
             }
         }
