@@ -57,12 +57,13 @@ public class ProgressListView extends RelativeLayout {
         text = (TextView) root.findViewById(R.id.progresslistview_text);
         text.setText(typedArray.getString(R.styleable.ProgressListView_text));
 
-        mListView = (ListView) root.findViewById(android.R.id.list);
-
         mProgressIndicator = (ViewGroup) root.findViewById(R.id.progresslistview_indicator);
 
         mTextEmpty = (TextView) root.findViewById(android.R.id.empty);
         mTextEmpty.setText(typedArray.getString(R.styleable.ProgressListView_textEmpty));
+
+        mListView = (ListView) root.findViewById(android.R.id.list);
+        mListView.setEmptyView(mTextEmpty);
     }
 
     /**
