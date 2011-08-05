@@ -36,6 +36,7 @@
                 <configuration>
                     <header>HEADER</header>
                     <excludes>
+                        <exclude>src/**/DashboardLayout.java</exclude>
                         <exclude>src/**/Eula.java</exclude>
                     </excludes>
                     <includes>
