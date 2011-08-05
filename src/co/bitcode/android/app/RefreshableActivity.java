@@ -16,6 +16,7 @@
 
 package co.bitcode.android.app;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,10 +29,10 @@ import co.bitcode.android.R;
  * @since 0.0.1
  * @author Lorenzo Villani
  */
-public abstract class RefreshableListActivity extends ListActivity {
+public abstract class RefreshableActivity extends Activity {
     private boolean mFirstTime;
 
-    public RefreshableListActivity() {
+    public RefreshableActivity() {
         super();
 
         mFirstTime = true;
