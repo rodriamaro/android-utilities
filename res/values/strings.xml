@@ -29,5 +29,6 @@
     <string name="fuzzydateview_oneHourAgoLabel">One hour ago</string>
     <string name="fuzzydateview_oneMinuteAgoLabel">One minute ago</string>
     <string name="previewpreference_notSet">Not set.</string>
-    <string name="refreshablelistactivity_refresh">Refresh</string>
+    <string name="activity_menu_refresh">Refresh</string>
+    <string name="fragment_menu_refresh">Refresh</string>
 </resources>

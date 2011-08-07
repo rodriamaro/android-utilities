@@ -20,6 +20,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:icon="@drawable/ic_menu_refresh"
-        android:id="@+id/activity_menu_refresh"
-        android:title="@string/activity_menu_refresh"/>
+        android:id="@+id/fragment_menu_refresh"
+        android:title="@string/fragment_menu_refresh"/>
 </menu>
