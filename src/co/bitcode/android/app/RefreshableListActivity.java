@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import co.bitcode.android.R;
+import co.bitcode.android.Refreshable;
 
 /**
  * Makes a {@link ListActivity} user-refreshable.
@@ -28,7 +29,7 @@ import co.bitcode.android.R;
  * @since 0.0.1
  * @author Lorenzo Villani
  */
-public abstract class RefreshableListActivity extends ListActivity {
+public abstract class RefreshableListActivity extends ListActivity implements Refreshable {
     private boolean mFirstTime;
 
     public RefreshableListActivity() {
@@ -53,7 +54,7 @@ public abstract class RefreshableListActivity extends ListActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.refreshablelistactivity_refresh:
+        case R.id.activity_menu_refresh:
             refresh(true);
 
             return true;
@@ -61,18 +62,6 @@ public abstract class RefreshableListActivity extends ListActivity {
             return super.onOptionsItemSelected(item);
         }
     }
-
-    /**
-     * Subclasses must implement this method to handle the "Refresh" menu item.
-     * 
-     * <p>
-     * This method is automatically invoked the first time this Activity is shown to the user.
-     * </p>
-     * 
-     * @param forced True if we forced a refresh via the menu item.
-     * @since 0.0.1
-     */
-    public abstract void refresh(boolean forced);
 
     /**
      * Invokes {@link #refresh(boolean)} the first time this Activity is shown.
