@@ -31,7 +31,7 @@ import android.widget.ArrayAdapter;
  * @since 0.0.1
  * @author Lorenzo Villani
  */
-public abstract class CustomViewArrayAdapter<T> extends ArrayAdapter<T> {
+public abstract class CustomViewArrayAdapter<T> extends DifferentialArrayAdapter<T> {
     private LayoutInflater mLayoutInflater;
 
     /**
@@ -55,8 +55,10 @@ public abstract class CustomViewArrayAdapter<T> extends ArrayAdapter<T> {
      * @since 0.0.1
      */
     public void addAll(Collection<T> collection) {
-        for (T element : collection) {
-            add(element);
+        if (collection != null) {
+            for (T element : collection) {
+                add(element);
+            }
         }
     }
 
