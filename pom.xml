@@ -16,6 +16,11 @@
             <artifactId>android</artifactId>
             <version>2.1.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.android.support</groupId>
+            <artifactId>v4</artifactId>
+            <version>3</version>
+        </dependency>
     </dependencies>
 
     <build>
