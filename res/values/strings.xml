@@ -18,9 +18,12 @@
 -->
 
 <resources>
+    <string name="activity_menu_refresh">Refresh</string>
+    <string name="dialog_error_title">Error</string>
     <string name="eula_accept">Accept</string>
     <string name="eula_refuse">Refuse</string>
     <string name="eula_title">License Agreement</string>
+    <string name="fragment_menu_refresh">Refresh</string>
     <string name="fuzzydateview_daysAgoFormat">%d days ago</string>
     <string name="fuzzydateview_hoursAgoFormat">%d hours ago</string>
     <string name="fuzzydateview_minutesAgoFormat">%d minutes ago</string>
@@ -29,6 +32,4 @@
     <string name="fuzzydateview_oneHourAgoLabel">One hour ago</string>
     <string name="fuzzydateview_oneMinuteAgoLabel">One minute ago</string>
     <string name="previewpreference_notSet">Not set.</string>
-    <string name="activity_menu_refresh">Refresh</string>
-    <string name="fragment_menu_refresh">Refresh</string>
 </resources>
