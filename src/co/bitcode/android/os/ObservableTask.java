@@ -17,6 +17,7 @@
 package co.bitcode.android.os;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 /**
  * An observable {@link AsyncTask}. Allows subscribers to be notified when the task is about to
@@ -74,6 +75,11 @@ public abstract class ObservableTask<Params, Progress, Result> extends
      */
     protected abstract Result doTask(Params... params) throws Throwable;
 
+    /**
+     * Do not override.
+     * 
+     * @see #doTask(Object...)
+     */
     @Override
     protected Result doInBackground(Params... params) {
         try {
@@ -114,12 +120,21 @@ public abstract class ObservableTask<Params, Progress, Result> extends
     protected void onPostExecute(Result result) {
         super.onPostExecute(result);
 
-        if ((mThrowable != null) && (mOnTaskError != null)) {
-            mOnTaskError.onTaskError(this, mThrowable);
-        } else if ((mThrowable != null) && (mOnTaskError == null)) {
-            throw new RuntimeException(mThrowable);
+        if (mThrowable != null) {
+            onTaskError(mThrowable);
         } else if (mOnTaskFinished != null) {
             mOnTaskFinished.onTaskFinished(this, result);
+        }
+    }
+
+    /**
+     * Calls the observer method or logs the error on Android's logcat.
+     */
+    private void onTaskError(Throwable t) {
+        if (mOnTaskError != null) {
+            mOnTaskError.onTaskError(this, t);
+        } else {
+            Log.e(getClass().getName(), t.getMessage(), t);
         }
     }
 }
