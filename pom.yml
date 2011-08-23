@@ -1,0 +1,39 @@
+groupId: co.bitcode.android
+artifactId: android-utilities
+version: 0.0.1-SNAPSHOT
+packaging: apklib
+
+name: Android Utilities
+
+properties:
+    project.build.sourceEncoding: UTF-8
+
+dependencies:
+    - groupId: com.google.android
+      artifactId: android
+      version: 2.1.2
+      scope: provided
+    - groupId: android.support
+      artifactId: compatibility-v4
+      version: r3
+
+build:
+    plugins:
+        - groupId: com.jayway.maven.plugins.android.generation2
+          artifactId: maven-android-plugin
+          version: 3.0.0-alpha-2
+          extensions: true
+        - groupId: com.mycila.maven-license-plugin
+          artifactId: maven-license-plugin
+          version: 1.8.0
+          configuration:
+              header: HEADER
+              strictCheck: true
+              excludes:
+                  - src/**/DashboardLayout.java
+                  - src/**/Eula.java
+              includes:
+                  - src/**/*.java
+                  - res/**/*.xml
+              mapping:
+                  java: SLASHSTAR_STYLE
