@@ -18,6 +18,7 @@ dependencies:
       version: r3
 
 build:
+    sourceDirectory: src
     plugins:
         - groupId: com.jayway.maven.plugins.android.generation2
           artifactId: maven-android-plugin
