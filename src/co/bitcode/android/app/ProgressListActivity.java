@@ -45,6 +45,16 @@ public abstract class ProgressListActivity extends RefreshableListActivity {
     }
 
     /**
+     * Get {@link ProgressListView}.
+     * 
+     * @return the {@link ProgressListView}
+     * @since 0.0.1
+     */
+    public ProgressListView getProgressListView() {
+        return mProgressListView;
+    }
+
+    /**
      * Hide the progress indicator.
      * 
      * @since 0.0.1
