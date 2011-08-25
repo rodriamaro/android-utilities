@@ -17,7 +17,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>android.support</groupId>
+            <groupId>com.google.android</groupId>
             <artifactId>compatibility-v4</artifactId>
             <version>r3</version>
         </dependency>
@@ -28,7 +28,7 @@
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>maven-android-plugin</artifactId>
-                <version>3.0.0-alpha-2</version>
+                <version>3.0.0-alpha-3</version>
                 <extensions>true</extensions>
             </plugin>
             <plugin>
