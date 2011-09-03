@@ -5,11 +5,18 @@
     <artifactId>android-utilities</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>apklib</packaging>
+    
+    
     <name>Android Utilities</name>
+    
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    
+    
     <dependencies>
+        <!-- Android -->
         <dependency>
             <groupId>com.google.android</groupId>
             <artifactId>android</artifactId>
@@ -22,15 +29,29 @@
             <version>r3</version>
         </dependency>
     </dependencies>
+    
+    
     <build>
         <sourceDirectory>src</sourceDirectory>
         <plugins>
+            <!-- Android -->
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>maven-android-plugin</artifactId>
                 <version>3.0.0-alpha-3</version>
                 <extensions>true</extensions>
             </plugin>
+            <!-- Compiler -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <!-- License Headers -->
             <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
@@ -39,8 +60,8 @@
                     <header>HEADER</header>
                     <strictCheck>true</strictCheck>
                     <excludes>
-                        <exclude>src/**/DashboardLayout.java</exclude>
-                        <exclude>src/**/Eula.java</exclude>
+                        <exclude>src/co/bitcode/android/app/Eula.java</exclude>
+                        <exclude>src/co/bitcode/android/widget/DashboardLayout.java</exclude>
                     </excludes>
                     <includes>
                         <include>src/**/*.java</include>
