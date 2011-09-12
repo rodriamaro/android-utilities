@@ -25,21 +25,15 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 
 import co.bitcode.android.R;
-import co.bitcode.android.os.ObservableTask;
 
 /**
- * Displays an EULA ("End User License Agreement") that the user has to accept before using the
- * application.
- * 
+ * Displays an EULA ("End User License Agreement") that the user has to accept before using the application.
  * <p>
  * The EULA is retrieved from your project's <code>assets</code> directory.
  * </p>
- * 
  * <p>
- * Your application should call {@link Eula#show(android.app.Activity)} in the onCreate() method of
- * the first activity.
+ * Your application should call {@link Eula#show(android.app.Activity)} in the onCreate() method of the first activity.
  * </p>
- * 
  * <p>
  * If the user accepts the EULA, it will never be shown again. If the user refuses,
  * {@link android.app.Activity#finish()} is invoked on your activity.
@@ -49,126 +43,150 @@ import co.bitcode.android.os.ObservableTask;
  * @author The Android Open Source Project
  * @author Lorenzo Villani
  */
-public class Eula {
-    private static final String ASSET_EULA = "EULA";
-    private static final String PREFERENCE = "eula";
-    private static final String PREFERENCE_EULA_ACCEPTED = "accepted";
+public class Eula
+{
+        private static final String ASSET_EULA = "EULA";
+        private static final String PREFERENCE = "eula";
+        private static final String PREFERENCE_EULA_ACCEPTED = "accepted";
 
-    /**
-     * Interface used to allow the creator of an {@link ObservableTask} to run some code when users
-     * accept the license agreement.
-     * 
-     * @author The Android Open Source Project
-     * @since 0.0.1
-     */
-    public static interface OnEulaAgreedTo {
         /**
-         * This method will be invoked when the user accepts the license agreement.
+         * Interface used to allow the creator of an {@link ObservableTask} to run some code when users accept the
+         * license agreement.
+         * 
+         * @author The Android Open Source Project
+         * @since 0.0.1
          */
-        void onEulaAgreedTo();
-    }
-
-    /**
-     * Displays the EULA if necessary. This method should be called from the onCreate() method of
-     * your main Activity.
-     * 
-     * @param activity The Activity to finish if the user rejects the EULA.
-     * @return Whether the user has agreed already.
-     * @since 0.0.1
-     */
-    public static boolean show(final Activity activity) {
-        final SharedPreferences preferences;
-
-        preferences = activity.getSharedPreferences(PREFERENCE, Context.MODE_PRIVATE);
-
-        if (!preferences.getBoolean(PREFERENCE_EULA_ACCEPTED, false)) {
-            final AlertDialog.Builder builder;
-
-            builder = new AlertDialog.Builder(activity);
-
-            builder.setTitle(R.string.eula_title);
-            builder.setCancelable(true);
-            builder.setPositiveButton(R.string.eula_accept, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    accept(preferences);
-                    if (activity instanceof OnEulaAgreedTo) {
-                        ((OnEulaAgreedTo) activity).onEulaAgreedTo();
-                    }
-                }
-            });
-            builder.setNegativeButton(R.string.eula_refuse, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    refuse(activity);
-                }
-            });
-            builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    refuse(activity);
-                }
-            });
-            builder.setMessage(readEula(activity));
-            builder.create().show();
-
-            return false;
+        public static interface OnEulaAgreedTo
+        {
+                /**
+                 * This method will be invoked when the user accepts the license agreement.
+                 */
+                void onEulaAgreedTo ();
         }
 
-        return true;
-    }
+        /**
+         * Displays the EULA if necessary. This method should be called from the onCreate() method of your main
+         * Activity.
+         * 
+         * @param activity The Activity to finish if the user rejects the EULA.
+         * @return Whether the user has agreed already.
+         * @since 0.0.1
+         */
+        public static boolean show ( final Activity activity )
+        {
+                final SharedPreferences preferences;
 
-    /**
-     * Accepts the EULA. That is, persists the truth value in our preference file.
-     * 
-     * @param preferences
-     */
-    private static void accept(SharedPreferences preferences) {
-        preferences.edit().putBoolean(PREFERENCE_EULA_ACCEPTED, true).commit();
-    }
+                preferences = activity.getSharedPreferences ( PREFERENCE, Context.MODE_PRIVATE );
 
-    /**
-     * Terminates parent activity.
-     * 
-     * @param activity Parent {@link Activity}.
-     */
-    private static void refuse(Activity activity) {
-        activity.finish();
-    }
+                if ( !preferences.getBoolean ( PREFERENCE_EULA_ACCEPTED, false ) )
+                {
+                        final AlertDialog.Builder builder;
 
-    /**
-     * Reads EULA from assets folder.
-     * 
-     * @param activity Parent {@link Activity}
-     * @return EULA contents.
-     */
-    private static CharSequence readEula(Activity activity) {
-        BufferedReader in;
+                        builder = new AlertDialog.Builder ( activity );
 
-        in = null;
+                        builder.setTitle ( R.string.eula_title );
+                        builder.setCancelable ( true );
+                        builder.setPositiveButton ( R.string.eula_accept, new DialogInterface.OnClickListener ()
+                        {
+                                @Override
+                                public void onClick ( DialogInterface dialog, int which )
+                                {
+                                        accept ( preferences );
+                                        if ( activity instanceof OnEulaAgreedTo )
+                                        {
+                                                ( ( OnEulaAgreedTo ) activity ).onEulaAgreedTo ();
+                                        }
+                                }
+                        } );
+                        builder.setNegativeButton ( R.string.eula_refuse, new DialogInterface.OnClickListener ()
+                        {
+                                @Override
+                                public void onClick ( DialogInterface dialog, int which )
+                                {
+                                        refuse ( activity );
+                                }
+                        } );
+                        builder.setOnCancelListener ( new DialogInterface.OnCancelListener ()
+                        {
+                                @Override
+                                public void onCancel ( DialogInterface dialog )
+                                {
+                                        refuse ( activity );
+                                }
+                        } );
+                        builder.setMessage ( readEula ( activity ) );
+                        builder.create ().show ();
 
-        try {
-            String line;
-            StringBuilder buffer;
-
-            in = new BufferedReader(new InputStreamReader(activity.getAssets().open(ASSET_EULA)));
-            buffer = new StringBuilder();
-
-            while ((line = in.readLine()) != null) {
-                buffer.append(line).append('\n');
-            }
-
-            return buffer;
-        } catch (IOException e) {
-            return "";
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException ex) {
-                    // Ignored
+                        return false;
                 }
-            }
+
+                return true;
         }
-    }
+
+        /**
+         * Accepts the EULA. That is, persists the truth value in our preference file.
+         * 
+         * @param preferences
+         */
+        private static void accept ( SharedPreferences preferences )
+        {
+                preferences.edit ().putBoolean ( PREFERENCE_EULA_ACCEPTED, true ).commit ();
+        }
+
+        /**
+         * Terminates parent activity.
+         * 
+         * @param activity Parent {@link Activity}.
+         */
+        private static void refuse ( Activity activity )
+        {
+                activity.finish ();
+        }
+
+        /**
+         * Reads EULA from assets folder.
+         * 
+         * @param activity Parent {@link Activity}
+         * @return EULA contents.
+         */
+        private static CharSequence readEula ( Activity activity )
+        {
+                BufferedReader in;
+
+                in = null;
+
+                try
+                {
+                        String line;
+                        StringBuilder buffer;
+
+                        in = new BufferedReader ( new InputStreamReader ( activity.getAssets ().open ( ASSET_EULA ) ) );
+                        buffer = new StringBuilder ();
+
+                        while ( ( line = in.readLine () ) != null )
+                        {
+                                buffer.append ( line ).append ( '\n' );
+                        }
+
+                        return buffer;
+                }
+                catch ( IOException e )
+                {
+                        return "";
+                }
+                finally
+                {
+                        if ( in != null )
+                        {
+                                try
+                                {
+                                        in.close ();
+                                }
+                                catch ( IOException ex )
+                                {
+                                        // Ignored
+                                }
+                        }
+                }
+        }
 }

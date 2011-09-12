@@ -26,7 +26,6 @@ import co.bitcode.android.R;
 
 /**
  * A {@link DialogPreference} which shows the current persisted value in the summary field.
- * 
  * <p>
  * It provides hooks for subclasses to store new values which will be called at appropriate times.
  * </p>
@@ -34,64 +33,71 @@ import co.bitcode.android.R;
  * @since 0.0.1
  * @author Lorenzo Villani
  */
-public abstract class PreviewPreference extends DialogPreference {
-    public PreviewPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    /**
-     * Sub-classes must implement this method in order to show a string representation of persisted
-     * data.
-     * 
-     * @return Persisted value as string.
-     * @since 0.0.1
-     */
-    protected abstract String getPersistedValueAsString();
-
-    /**
-     * Set-up this Preference.
-     */
-    @Override
-    protected View onCreateView(ViewGroup parent) {
-        refreshSummary();
-
-        return super.onCreateView(parent);
-    }
-
-    /**
-     * Updates summary with new value.
-     */
-    @Override
-    protected void onDialogClosed(boolean positiveResult) {
-        super.onDialogClosed(positiveResult);
-
-        if (positiveResult) {
-            persistValue();
-
-            refreshSummary();
+public abstract class PreviewPreference extends DialogPreference
+{
+        public PreviewPreference ( Context context, AttributeSet attrs )
+        {
+                super ( context, attrs );
         }
-    }
 
-    /**
-     * This method is invoked when the dialog is closed and it's time to persist the preference's
-     * value.
-     * 
-     * @since 0.0.1
-     */
-    protected abstract void persistValue();
+        /**
+         * Sub-classes must implement this method in order to show a string representation of persisted data.
+         * 
+         * @return Persisted value as string.
+         * @since 0.0.1
+         */
+        protected abstract String getPersistedValueAsString ();
 
-    /**
-     * Refreshes summary.
-     */
-    private void refreshSummary() {
-        String value;
+        /**
+         * Set-up this Preference.
+         */
+        @Override
+        protected View onCreateView ( ViewGroup parent )
+        {
+                refreshSummary ();
 
-        value = getPersistedValueAsString();
-
-        if (value == null) {
-            setSummary(R.string.previewpreference_notSet);
-        } else {
-            setSummary(value);
+                return super.onCreateView ( parent );
         }
-    }
+
+        /**
+         * Updates summary with new value.
+         */
+        @Override
+        protected void onDialogClosed ( boolean positiveResult )
+        {
+                super.onDialogClosed ( positiveResult );
+
+                if ( positiveResult )
+                {
+                        persistValue ();
+
+                        refreshSummary ();
+                }
+        }
+
+        /**
+         * This method is invoked when the dialog is closed and it's time to persist the preference's value.
+         * 
+         * @since 0.0.1
+         */
+        protected abstract void persistValue ();
+
+        /**
+         * Refreshes summary.
+         */
+        private void refreshSummary ()
+        {
+                String value;
+
+                value = getPersistedValueAsString ();
+
+                if ( value == null )
+                {
+                        setSummary ( R.string.previewpreference_notSet );
+                }
+                else
+                {
+                        setSummary ( value );
+                }
+        }
 }

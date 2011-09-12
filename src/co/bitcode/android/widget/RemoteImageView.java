@@ -29,113 +29,129 @@ import android.widget.ImageView;
  * @author Lorenzo Villani
  * @since 0.0.1
  */
-public abstract class RemoteImageView extends ImageView {
-    /**
-     * Use this as a return value with {@link #getMissingDrawable()} and
-     * {@link #getLoadingDrawable()} in case you don't want to change our current bitmap.
-     */
-    protected static final int NO_PICTURE = -1;
+public abstract class RemoteImageView extends ImageView
+{
+        /**
+         * Use this as a return value with {@link #getMissingDrawable()} and {@link #getLoadingDrawable()} in case you
+         * don't want to change our current bitmap.
+         */
+        protected static final int NO_PICTURE = -1;
 
-    /**
-     * @param context
-     * @since 0.0.1
-     */
-    public RemoteImageView(Context context) {
-        super(context);
-    }
+        /**
+         * @param context
+         * @since 0.0.1
+         */
+        public RemoteImageView ( Context context )
+        {
+                super ( context );
+        }
 
-    /**
-     * @param context
-     * @param attrs
-     * @since 0.0.1
-     */
-    public RemoteImageView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
+        /**
+         * @param context
+         * @param attrs
+         * @since 0.0.1
+         */
+        public RemoteImageView ( Context context, AttributeSet attrs )
+        {
+                super ( context, attrs );
+        }
 
-    /**
-     * @param context
-     * @param attrs
-     * @param defStyle
-     * @since 0.0.1
-     */
-    public RemoteImageView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-    }
+        /**
+         * @param context
+         * @param attrs
+         * @param defStyle
+         * @since 0.0.1
+         */
+        public RemoteImageView ( Context context, AttributeSet attrs, int defStyle )
+        {
+                super ( context, attrs, defStyle );
+        }
 
-    //
-    // Getters and Setters
-    //
-    /**
-     * Triggers an asynchronous image download.
-     * 
-     * @see #fetchRemoteImage(Uri)
-     * @since 0.0.1
-     */
-    @Override
-    public void setImageURI(Uri uri) {
-        new AsyncTask<Uri, Void, Bitmap>() {
-            protected void onPreExecute() {
-                int loadingDrawable;
-                
-                loadingDrawable = getLoadingDrawable();
-                
-                if (loadingDrawable != NO_PICTURE) {
-                    setImageResource(loadingDrawable);
-                }
-            };
-            
-            protected Bitmap doInBackground(Uri... params) {
-                if (params != null) {
-                    return fetchRemoteImage(params[0]);
-                } else {
-                    return null;
-                }
-            };
+        //
+        // Getters and Setters
+        //
+        /**
+         * Triggers an asynchronous image download.
+         * 
+         * @see #fetchRemoteImage(Uri)
+         * @since 0.0.1
+         */
+        @Override
+        public void setImageURI ( Uri uri )
+        {
+                new AsyncTask < Uri, Void, Bitmap > ()
+                {
+                        protected void onPreExecute ()
+                        {
+                                int loadingDrawable;
 
-            protected void onPostExecute(Bitmap result) {
-                if (result != null) {
-                    setImageBitmap(result);
-                } else {
-                    int missingDrawable;
-                    
-                    missingDrawable = getMissingDrawable();
-                    
-                    if (missingDrawable != NO_PICTURE) {
-                        setImageResource(missingDrawable);
-                    }
-                }
-            };
-        }.execute(uri);
-    }
+                                loadingDrawable = getLoadingDrawable ();
 
-    /**
-     * This method is invoked when there's a need to download a picture from the network.
-     * 
-     * <p>
-     * Execution of this method is already wrapped inside an {@link AsyncTask} which means that
-     * computation doesn't happen inside the UI thread.
-     * </p>
-     * 
-     * @param uri Uri of the image to download.
-     * @return A {@link Bitmap} containing the downloaded resource.
-     * @since 0.0.1
-     */
-    protected abstract Bitmap fetchRemoteImage(Uri uri);
+                                if ( loadingDrawable != NO_PICTURE )
+                                {
+                                        setImageResource ( loadingDrawable );
+                                }
+                        };
 
-    /**
-     * This method is invoked when this {@link ImageView} is downloading a picture from the network.
-     * 
-     * @return Drawable ID.
-     */
-    protected abstract int getLoadingDrawable();
+                        protected Bitmap doInBackground ( Uri ... params )
+                        {
+                                if ( params != null )
+                                {
+                                        return fetchRemoteImage ( params[0] );
+                                }
+                                else
+                                {
+                                        return null;
+                                }
+                        };
 
-    /**
-     * This method is invoked when there's no picture to download from the server, an error occurred
-     * or the image could not be found (which is generally indicated by
-     * {@link #fetchRemoteImage(Uri)} returning <code>null</code>
-     * 
-     * @return Drawable ID.
-     */
-    protected abstract int getMissingDrawable();
+                        protected void onPostExecute ( Bitmap result )
+                        {
+                                if ( result != null )
+                                {
+                                        setImageBitmap ( result );
+                                }
+                                else
+                                {
+                                        int missingDrawable;
+
+                                        missingDrawable = getMissingDrawable ();
+
+                                        if ( missingDrawable != NO_PICTURE )
+                                        {
+                                                setImageResource ( missingDrawable );
+                                        }
+                                }
+                        };
+                }.execute ( uri );
+        }
+
+        /**
+         * This method is invoked when there's a need to download a picture from the network.
+         * <p>
+         * Execution of this method is already wrapped inside an {@link AsyncTask} which means that computation doesn't
+         * happen inside the UI thread.
+         * </p>
+         * 
+         * @param uri Uri of the image to download.
+         * @return A {@link Bitmap} containing the downloaded resource.
+         * @since 0.0.1
+         */
+        protected abstract Bitmap fetchRemoteImage ( Uri uri );
+
+        /**
+         * This method is invoked when this {@link ImageView} is downloading a picture from the network.
+         * 
+         * @return Drawable ID.
+         */
+        protected abstract int getLoadingDrawable ();
+
+        /**
+         * This method is invoked when there's no picture to download from the server, an error occurred or the image
+         * could not be found (which is generally indicated by {@link #fetchRemoteImage(Uri)} returning
+         * <code>null</code>
+         * 
+         * @return Drawable ID.
+         */
+        protected abstract int getMissingDrawable ();
 }

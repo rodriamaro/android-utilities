@@ -27,95 +27,101 @@ import android.content.Intent;
  * @since 0.0.1
  * @author Lorenzo Villani
  */
-public class NotificationBuilder {
-    private static final int DEFAULT_FLAG = PendingIntent.FLAG_ONE_SHOT;
+public class NotificationBuilder
+{
+        private static final int DEFAULT_FLAG = PendingIntent.FLAG_ONE_SHOT;
 
-    private CharSequence mTicker;
-    private CharSequence mTitle;
-    private CharSequence mMessage;
-    private Context mContext;
-    private Intent mIntent;
-    private int mIconId;
-    private int mIntentFlag;
+        private CharSequence mTicker;
+        private CharSequence mTitle;
+        private CharSequence mMessage;
+        private Context mContext;
+        private Intent mIntent;
+        private int mIconId;
+        private int mIntentFlag;
 
-    /**
-     * @param context
-     * @since 0.0.1
-     */
-    public NotificationBuilder(Context context) {
-        mContext = context;
+        /**
+         * @param context
+         * @since 0.0.1
+         */
+        public NotificationBuilder ( Context context )
+        {
+                mContext = context;
 
-        mIntentFlag = DEFAULT_FLAG;
-    }
-
-    /**
-     * Sets icon shown in ticker and notification.
-     * 
-     * @param resourceId Drawable ID.
-     * @return this
-     * @since 0.0.1
-     */
-    public NotificationBuilder setIcon(int resourceId) {
-        mIconId = resourceId;
-
-        return this;
-    }
-
-    /**
-     * Sets the {@link Intent} to launch when users click on our notification.
-     * 
-     * <p>
-     * This {@link Intent} is automatically wrapped in a {@link PendingIntent}.
-     * </p>
-     * 
-     * @param intent Intent to launch.
-     * @param title Notification title.
-     * @param message Notification message.
-     * @return this
-     * @since 0.0.1
-     */
-    public NotificationBuilder setIntent(Intent intent, CharSequence title, CharSequence message) {
-        mIntent = intent;
-
-        mMessage = message;
-
-        mTitle = title;
-
-        return this;
-    }
-
-    /**
-     * Sets ticker message to show in the notification bar.
-     * 
-     * @param ticker Ticker message.
-     * @return this.
-     * @since 0.0.1
-     */
-    public NotificationBuilder setTicker(CharSequence ticker) {
-        mTicker = ticker;
-
-        return this;
-    }
-
-    /**
-     * Builds {@link Notification} object.
-     * 
-     * @since 0.0.1
-     * @return A {@link Notification} object.
-     */
-    public Notification create() {
-        Notification notification;
-
-        notification = new Notification(mIconId, mTicker, System.currentTimeMillis());
-
-        if (mIntent != null) {
-            PendingIntent pendingIntent;
-
-            pendingIntent = PendingIntent.getActivity(mContext, 0, mIntent, mIntentFlag);
-
-            notification.setLatestEventInfo(mContext, mTitle, mMessage, pendingIntent);
+                mIntentFlag = DEFAULT_FLAG;
         }
 
-        return notification;
-    }
+        /**
+         * Sets icon shown in ticker and notification.
+         * 
+         * @param resourceId Drawable ID.
+         * @return this
+         * @since 0.0.1
+         */
+        public NotificationBuilder setIcon ( int resourceId )
+        {
+                mIconId = resourceId;
+
+                return this;
+        }
+
+        /**
+         * Sets the {@link Intent} to launch when users click on our notification.
+         * <p>
+         * This {@link Intent} is automatically wrapped in a {@link PendingIntent}.
+         * </p>
+         * 
+         * @param intent Intent to launch.
+         * @param title Notification title.
+         * @param message Notification message.
+         * @return this
+         * @since 0.0.1
+         */
+        public NotificationBuilder setIntent ( Intent intent, CharSequence title, CharSequence message )
+        {
+                mIntent = intent;
+
+                mMessage = message;
+
+                mTitle = title;
+
+                return this;
+        }
+
+        /**
+         * Sets ticker message to show in the notification bar.
+         * 
+         * @param ticker Ticker message.
+         * @return this.
+         * @since 0.0.1
+         */
+        public NotificationBuilder setTicker ( CharSequence ticker )
+        {
+                mTicker = ticker;
+
+                return this;
+        }
+
+        /**
+         * Builds {@link Notification} object.
+         * 
+         * @since 0.0.1
+         * @return A {@link Notification} object.
+         */
+        public Notification create ()
+        {
+                Notification notification;
+
+                notification = new Notification ( mIconId, mTicker, System.currentTimeMillis () );
+
+                if ( mIntent != null )
+                {
+                        PendingIntent pendingIntent;
+
+                        pendingIntent = PendingIntent.getActivity ( mContext, 0, mIntent, mIntentFlag );
+
+                        notification.setLatestEventInfo ( mContext, mTitle, mMessage, pendingIntent );
+                }
+
+                return notification;
+        }
 }

@@ -30,96 +30,105 @@ import android.widget.TextView;
  * @since 0.0.1
  * @author Lorenzo Villani
  */
-public class EnumAdapter<E extends Enum<E>> extends CustomViewArrayAdapter<E> {
-    private String[] mFriendlyStrings;
+public class EnumAdapter < E extends Enum < E >> extends CustomViewArrayAdapter < E >
+{
+        private String[] mFriendlyStrings;
 
-    /**
-     * @see http://www.youtube.com/watch?v=wDBM6wVEO70
-     * 
-     * @author Lorenzo Villani
-     */
-    private static class ViewHolder {
-        public TextView textView;
-    }
-
-    /**
-     * @see http://www.youtube.com/watch?v=wDBM6wVEO70
-     * 
-     * @author Lorenzo Villani
-     */
-    private static class DropdownViewHolder {
-        public CheckedTextView checkedTextView;
-    }
-
-    /**
-     * @param context
-     * @param list
-     * @since 0.0.1
-     */
-    public EnumAdapter(Context context, List<E> list, String[] friendlyStrings) {
-        super(context, list);
-
-        assert (friendlyStrings.length == list.size());
-
-        mFriendlyStrings = friendlyStrings;
-    }
-
-    /**
-     * Set-up "idle" view.
-     */
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
-
-        //
-        // Set-up views if not done before
-        //
-        if (convertView == null) {
-            convertView = inflate(android.R.layout.simple_spinner_item);
-
-            viewHolder = new ViewHolder();
-            viewHolder.textView = (TextView) convertView.findViewById(android.R.id.text1);
-
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+        /**
+         * @see http://www.youtube.com/watch?v=wDBM6wVEO70
+         * @author Lorenzo Villani
+         */
+        private static class ViewHolder
+        {
+                public TextView textView;
         }
 
-        //
-        // Otherwise reuse it
-        //
-        viewHolder.textView.setText(mFriendlyStrings[position]);
-
-        return convertView;
-    }
-
-    /**
-     * Set-up "dropdown" view.
-     */
-    @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        DropdownViewHolder viewHolder;
-
-        //
-        // Set-up views if not done before
-        //
-        if (convertView == null) {
-            convertView = inflate(android.R.layout.simple_spinner_dropdown_item);
-
-            viewHolder = new DropdownViewHolder();
-            viewHolder.checkedTextView = (CheckedTextView) convertView
-                    .findViewById(android.R.id.text1);
-
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (DropdownViewHolder) convertView.getTag();
+        /**
+         * @see http://www.youtube.com/watch?v=wDBM6wVEO70
+         * @author Lorenzo Villani
+         */
+        private static class DropdownViewHolder
+        {
+                public CheckedTextView checkedTextView;
         }
 
-        //
-        // Otherwise reuse it
-        //
-        viewHolder.checkedTextView.setText(mFriendlyStrings[position]);
+        /**
+         * @param context
+         * @param list
+         * @since 0.0.1
+         */
+        public EnumAdapter ( Context context, List < E > list, String[] friendlyStrings )
+        {
+                super ( context, list );
 
-        return convertView;
-    }
+                assert ( friendlyStrings.length == list.size () );
+
+                mFriendlyStrings = friendlyStrings;
+        }
+
+        /**
+         * Set-up "idle" view.
+         */
+        @Override
+        public View getView ( int position, View convertView, ViewGroup parent )
+        {
+                ViewHolder viewHolder;
+
+                //
+                // Set-up views if not done before
+                //
+                if ( convertView == null )
+                {
+                        convertView = inflate ( android.R.layout.simple_spinner_item );
+
+                        viewHolder = new ViewHolder ();
+                        viewHolder.textView = ( TextView ) convertView.findViewById ( android.R.id.text1 );
+
+                        convertView.setTag ( viewHolder );
+                }
+                else
+                {
+                        viewHolder = ( ViewHolder ) convertView.getTag ();
+                }
+
+                //
+                // Otherwise reuse it
+                //
+                viewHolder.textView.setText ( mFriendlyStrings[position] );
+
+                return convertView;
+        }
+
+        /**
+         * Set-up "dropdown" view.
+         */
+        @Override
+        public View getDropDownView ( int position, View convertView, ViewGroup parent )
+        {
+                DropdownViewHolder viewHolder;
+
+                //
+                // Set-up views if not done before
+                //
+                if ( convertView == null )
+                {
+                        convertView = inflate ( android.R.layout.simple_spinner_dropdown_item );
+
+                        viewHolder = new DropdownViewHolder ();
+                        viewHolder.checkedTextView = ( CheckedTextView ) convertView.findViewById ( android.R.id.text1 );
+
+                        convertView.setTag ( viewHolder );
+                }
+                else
+                {
+                        viewHolder = ( DropdownViewHolder ) convertView.getTag ();
+                }
+
+                //
+                // Otherwise reuse it
+                //
+                viewHolder.checkedTextView.setText ( mFriendlyStrings[position] );
+
+                return convertView;
+        }
 }

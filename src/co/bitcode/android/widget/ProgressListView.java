@@ -32,69 +32,74 @@ import co.bitcode.android.R;
  * @since 0.0.1
  * @author Lorenzo Villani
  */
-public class ProgressListView extends RelativeLayout {
-    private ListView mListView;
-    private TextView mTextEmpty;
-    private ViewGroup mProgressIndicator;
+public class ProgressListView extends RelativeLayout
+{
+        private ListView mListView;
+        private TextView mTextEmpty;
+        private ViewGroup mProgressIndicator;
 
-    /**
-     * @param context
-     * @param attrs
-     * @since 0.0.1
-     */
-    public ProgressListView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        /**
+         * @param context
+         * @param attrs
+         * @since 0.0.1
+         */
+        public ProgressListView ( Context context, AttributeSet attrs )
+        {
+                super ( context, attrs );
 
-        TypedArray typedArray;
+                TypedArray typedArray;
 
-        TextView text;
-        ViewGroup root;
+                TextView text;
+                ViewGroup root;
 
-        typedArray = context.obtainStyledAttributes(attrs, R.styleable.ProgressListView);
+                typedArray = context.obtainStyledAttributes ( attrs, R.styleable.ProgressListView );
 
-        root = (ViewGroup) inflate(context, R.layout.progresslistview, (ViewGroup) getRootView());
+                root = ( ViewGroup ) inflate ( context, R.layout.progresslistview, ( ViewGroup ) getRootView () );
 
-        text = (TextView) root.findViewById(R.id.progresslistview_text);
-        text.setText(typedArray.getString(R.styleable.ProgressListView_text));
+                text = ( TextView ) root.findViewById ( R.id.progresslistview_text );
+                text.setText ( typedArray.getString ( R.styleable.ProgressListView_text ) );
 
-        mProgressIndicator = (ViewGroup) root.findViewById(R.id.progresslistview_indicator);
+                mProgressIndicator = ( ViewGroup ) root.findViewById ( R.id.progresslistview_indicator );
 
-        mTextEmpty = (TextView) root.findViewById(android.R.id.empty);
-        mTextEmpty.setText(typedArray.getString(R.styleable.ProgressListView_textEmpty));
+                mTextEmpty = ( TextView ) root.findViewById ( android.R.id.empty );
+                mTextEmpty.setText ( typedArray.getString ( R.styleable.ProgressListView_textEmpty ) );
 
-        mListView = (ListView) root.findViewById(android.R.id.list);
-        mListView.setEmptyView(mTextEmpty);
-    }
+                mListView = ( ListView ) root.findViewById ( android.R.id.list );
+                mListView.setEmptyView ( mTextEmpty );
+        }
 
-    /**
-     * Gets the {@link ListView} embedded in this {@link ViewGroup}.
-     * 
-     * @return The {@link ListView} associated with this <code>ProgressListView</code>
-     * @since 0.0.1
-     */
-    public ListView getListView() {
-        return mListView;
-    }
+        /**
+         * Gets the {@link ListView} embedded in this {@link ViewGroup}.
+         * 
+         * @return The {@link ListView} associated with this <code>ProgressListView</code>
+         * @since 0.0.1
+         */
+        public ListView getListView ()
+        {
+                return mListView;
+        }
 
-    /**
-     * Hides the progress indicator and shows the {@link ListView}.
-     * 
-     * @since 0.0.1
-     */
-    public void hideIndicator() {
-        mListView.setVisibility(VISIBLE);
+        /**
+         * Hides the progress indicator and shows the {@link ListView}.
+         * 
+         * @since 0.0.1
+         */
+        public void hideIndicator ()
+        {
+                mListView.setVisibility ( VISIBLE );
 
-        mProgressIndicator.setVisibility(INVISIBLE);
-    }
+                mProgressIndicator.setVisibility ( INVISIBLE );
+        }
 
-    /**
-     * Shows the progress indicator and hides the {@link ListView}.
-     * 
-     * @since 0.0.1
-     */
-    public void showIndicator() {
-        mListView.setVisibility(INVISIBLE);
+        /**
+         * Shows the progress indicator and hides the {@link ListView}.
+         * 
+         * @since 0.0.1
+         */
+        public void showIndicator ()
+        {
+                mListView.setVisibility ( INVISIBLE );
 
-        mProgressIndicator.setVisibility(VISIBLE);
-    }
+                mProgressIndicator.setVisibility ( VISIBLE );
+        }
 }

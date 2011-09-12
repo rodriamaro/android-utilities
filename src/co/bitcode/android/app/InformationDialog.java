@@ -27,41 +27,45 @@ import co.bitcode.android.R;
  * @author Lorenzo Villani
  * @since 0.0.1
  */
-public class InformationDialog extends AlertDialog {
-    /**
-     * Construct an error dialog.
-     * 
-     * @param context Parent context.
-     * @param message Message to show.
-     */
-    public InformationDialog(Context context, CharSequence message) {
-        super(context);
+public class InformationDialog extends AlertDialog
+{
+        /**
+         * Construct an error dialog.
+         * 
+         * @param context Parent context.
+         * @param message Message to show.
+         */
+        public InformationDialog ( Context context, CharSequence message )
+        {
+                super ( context );
 
-        init();
+                init ();
 
-        setMessage(message);
-    }
+                setMessage ( message );
+        }
 
-    /**
-     * Construct an error dialog.
-     * 
-     * @param context Parent context.
-     * @param messageId String resource ID.
-     */
-    public InformationDialog(Context context, int messageId) {
-        super(context);
+        /**
+         * Construct an error dialog.
+         * 
+         * @param context Parent context.
+         * @param messageId String resource ID.
+         */
+        public InformationDialog ( Context context, int messageId )
+        {
+                super ( context );
 
-        init();
+                init ();
 
-        setMessage(context.getResources().getString(messageId));
-    }
+                setMessage ( context.getResources ().getString ( messageId ) );
+        }
 
-    /**
-     * Common initialization code.
-     */
-    private void init() {
-        setIcon(android.R.drawable.ic_dialog_info);
+        /**
+         * Common initialization code.
+         */
+        private void init ()
+        {
+                setIcon ( android.R.drawable.ic_dialog_info );
 
-        setTitle(R.string.dialog_error_title);
-    }
+                setTitle ( R.string.dialog_error_title );
+        }
 }

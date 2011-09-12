@@ -23,118 +23,128 @@ import android.content.Context;
 import android.widget.ArrayAdapter;
 
 /**
- * 
  * @author Lorenzo Villani
  */
-public class DifferentialArrayAdapter<T> extends ArrayAdapter<T> {
-    /**
-     * Constructor.
-     * 
-     * @param context
-     * @param textViewResourceId
-     */
-    public DifferentialArrayAdapter(Context context, int textViewResourceId) {
-        super(context, textViewResourceId);
-    }
-
-    /**
-     * Constructor.
-     * 
-     * @param context
-     * @param textViewResourceId
-     * @param objects
-     */
-    public DifferentialArrayAdapter(Context context, int textViewResourceId, T[] objects) {
-        super(context, textViewResourceId, objects);
-    }
-
-    /**
-     * Constructor.
-     * 
-     * @param context
-     * @param textViewResourceId
-     * @param objects
-     */
-    public DifferentialArrayAdapter(Context context, int textViewResourceId, List<T> objects) {
-        super(context, textViewResourceId, objects);
-    }
-
-    /**
-     * Constructor.
-     * 
-     * @param context
-     * @param resource
-     * @param textViewResourceId
-     */
-    public DifferentialArrayAdapter(Context context, int resource, int textViewResourceId) {
-        super(context, resource, textViewResourceId);
-    }
-
-    /**
-     * Constructor.
-     * 
-     * @param context
-     * @param resource
-     * @param textViewResourceId
-     * @param objects
-     */
-    public DifferentialArrayAdapter(Context context, int resource, int textViewResourceId,
-            List<T> objects) {
-        super(context, resource, textViewResourceId, objects);
-    }
-
-    /**
-     * Constructor.
-     * 
-     * @param context
-     * @param resource
-     * @param textViewResourceId
-     * @param objects
-     */
-    public DifferentialArrayAdapter(Context context, int resource, int textViewResourceId,
-            T[] objects) {
-        super(context, resource, textViewResourceId, objects);
-    }
-
-    /**
-     * Updates this list view.
-     * 
-     * <strong>O(n<sup>2</sup>) ahead! You've been warned.</strong>
-     * 
-     * @param collection
-     */
-    public void update(Collection<T> collection) {
-        for (T element : collection) {
-            int position;
-
-            position = find(element);
-
-            if (position >= 0) {
-                insert(element, position);
-                remove(element);
-            } else {
-                add(element);
-            }
-        }
-    }
-
-    /**
-     * Find element position (if any).
-     * 
-     * @param what Element to find.
-     * @return
-     */
-    private int find(T what) {
-        int size;
-
-        size = getCount();
-
-        for (int i = 0; i < size; i++) {
-            if (what.equals(getItem(i))) {
-                return i;
-            }
+public class DifferentialArrayAdapter < T > extends ArrayAdapter < T >
+{
+        /**
+         * Constructor.
+         * 
+         * @param context
+         * @param textViewResourceId
+         */
+        public DifferentialArrayAdapter ( Context context, int textViewResourceId )
+        {
+                super ( context, textViewResourceId );
         }
 
-        return -1;
-    }
+        /**
+         * Constructor.
+         * 
+         * @param context
+         * @param textViewResourceId
+         * @param objects
+         */
+        public DifferentialArrayAdapter ( Context context, int textViewResourceId, T[] objects )
+        {
+                super ( context, textViewResourceId, objects );
+        }
+
+        /**
+         * Constructor.
+         * 
+         * @param context
+         * @param textViewResourceId
+         * @param objects
+         */
+        public DifferentialArrayAdapter ( Context context, int textViewResourceId, List < T > objects )
+        {
+                super ( context, textViewResourceId, objects );
+        }
+
+        /**
+         * Constructor.
+         * 
+         * @param context
+         * @param resource
+         * @param textViewResourceId
+         */
+        public DifferentialArrayAdapter ( Context context, int resource, int textViewResourceId )
+        {
+                super ( context, resource, textViewResourceId );
+        }
+
+        /**
+         * Constructor.
+         * 
+         * @param context
+         * @param resource
+         * @param textViewResourceId
+         * @param objects
+         */
+        public DifferentialArrayAdapter ( Context context, int resource, int textViewResourceId, List < T > objects )
+        {
+                super ( context, resource, textViewResourceId, objects );
+        }
+
+        /**
+         * Constructor.
+         * 
+         * @param context
+         * @param resource
+         * @param textViewResourceId
+         * @param objects
+         */
+        public DifferentialArrayAdapter ( Context context, int resource, int textViewResourceId, T[] objects )
+        {
+                super ( context, resource, textViewResourceId, objects );
+        }
+
+        /**
+         * Updates this list view. <strong>O(n<sup>2</sup>) ahead! You've been warned.</strong>
+         * 
+         * @param collection
+         */
+        public void update ( Collection < T > collection )
+        {
+                for ( T element : collection )
+                {
+                        int position;
+
+                        position = find ( element );
+
+                        if ( position >= 0 )
+                        {
+                                insert ( element, position );
+                                remove ( element );
+                        }
+                        else
+                        {
+                                add ( element );
+                        }
+                }
+        }
+
+        /**
+         * Find element position (if any).
+         * 
+         * @param what Element to find.
+         * @return
+         */
+        private int find ( T what )
+        {
+                int size;
+
+                size = getCount ();
+
+                for ( int i = 0; i < size; i++ )
+                {
+                        if ( what.equals ( getItem ( i ) ) )
+                        {
+                                return i;
+                        }
+                }
+
+                return -1;
+        }
 }

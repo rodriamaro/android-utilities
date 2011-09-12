@@ -31,65 +31,72 @@ import android.widget.ArrayAdapter;
  * @since 0.0.1
  * @author Lorenzo Villani
  */
-public abstract class CustomViewArrayAdapter<T> extends DifferentialArrayAdapter<T> {
-    private LayoutInflater mLayoutInflater;
+public abstract class CustomViewArrayAdapter < T > extends DifferentialArrayAdapter < T >
+{
+        private LayoutInflater mLayoutInflater;
 
-    /**
-     * Intialize an instance of this {@link ArrayAdapter}
-     * 
-     * @param context Parent <code>Context</code>.
-     * @param list Objects to display.
-     * @since 0.0.1
-     */
-    public CustomViewArrayAdapter(Context context, List<T> list) {
-        super(context, 0, list);
+        /**
+         * Intialize an instance of this {@link ArrayAdapter}
+         * 
+         * @param context Parent <code>Context</code>.
+         * @param list Objects to display.
+         * @since 0.0.1
+         */
+        public CustomViewArrayAdapter ( Context context, List < T > list )
+        {
+                super ( context, 0, list );
 
-        mLayoutInflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
-
-    /**
-     * Adds the specified items at the end of the array.
-     * 
-     * @param collection The items to add at the end of the array.
-     * @since 0.0.1
-     */
-    public void addAll(Collection<T> collection) {
-        if (collection != null) {
-            for (T element : collection) {
-                add(element);
-            }
+                mLayoutInflater = ( LayoutInflater ) context.getSystemService ( Context.LAYOUT_INFLATER_SERVICE );
         }
-    }
 
-    /**
-     * All sub-classes are supposed to have stable IDs for bound data.
-     */
-    @Override
-    public boolean hasStableIds() {
-        return true;
-    }
+        /**
+         * Adds the specified items at the end of the array.
+         * 
+         * @param collection The items to add at the end of the array.
+         * @since 0.0.1
+         */
+        public void addAll ( Collection < T > collection )
+        {
+                if ( collection != null )
+                {
+                        for ( T element : collection )
+                        {
+                                add ( element );
+                        }
+                }
+        }
 
-    /**
-     * Inflate layout.
-     * 
-     * @param layoutId Layout resource ID.
-     * @return Inflated View.
-     * @since 0.0.1
-     */
-    protected View inflate(int layoutId) {
-        return inflate(layoutId, null);
-    }
+        /**
+         * All sub-classes are supposed to have stable IDs for bound data.
+         */
+        @Override
+        public boolean hasStableIds ()
+        {
+                return true;
+        }
 
-    /**
-     * Inflate layout and attach it to parent View.
-     * 
-     * @param layoutId Layout resource ID.
-     * @param root Parent View.
-     * @return Inflated View.
-     * @since 0.0.1
-     */
-    protected View inflate(int layoutId, ViewGroup parent) {
-        return mLayoutInflater.inflate(layoutId, parent, false);
-    }
+        /**
+         * Inflate layout.
+         * 
+         * @param layoutId Layout resource ID.
+         * @return Inflated View.
+         * @since 0.0.1
+         */
+        protected View inflate ( int layoutId )
+        {
+                return inflate ( layoutId, null );
+        }
+
+        /**
+         * Inflate layout and attach it to parent View.
+         * 
+         * @param layoutId Layout resource ID.
+         * @param root Parent View.
+         * @return Inflated View.
+         * @since 0.0.1
+         */
+        protected View inflate ( int layoutId, ViewGroup parent )
+        {
+                return mLayoutInflater.inflate ( layoutId, parent, false );
+        }
 }

@@ -23,7 +23,6 @@ import co.bitcode.android.widget.ProgressListView;
 
 /**
  * An activity that displays a list of items using a {@link ProgressListView}
- * 
  * <p>
  * The progress indicator is hidden by default.
  * </p>
@@ -31,59 +30,66 @@ import co.bitcode.android.widget.ProgressListView;
  * @since 0.0.1
  * @author Lorenzo Villani
  */
-public abstract class ProgressListActivity extends RefreshableListActivity {
-    private ProgressListView mProgressListView;
+public abstract class ProgressListActivity extends RefreshableListActivity
+{
+        private ProgressListView mProgressListView;
 
-    /**
-     * Get ListView.
-     * 
-     * @since 0.0.1
-     */
-    @Override
-    public ListView getListView() {
-        return mProgressListView.getListView();
-    }
-
-    /**
-     * Get {@link ProgressListView}.
-     * 
-     * @return the {@link ProgressListView}
-     * @since 0.0.1
-     */
-    public ProgressListView getProgressListView() {
-        return mProgressListView;
-    }
-
-    /**
-     * Hide the progress indicator.
-     * 
-     * @since 0.0.1
-     */
-    public void hideIndicator() {
-        mProgressListView.hideIndicator();
-    }
-
-    /**
-     * Show the progress indicator.
-     * 
-     * @since 0.0.1
-     */
-    public void showIndicator() {
-        mProgressListView.showIndicator();
-    }
-
-    /**
-     * Makes sure that subclasses have defined progresslist.
-     */
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        mProgressListView = (ProgressListView) findViewById(R.id.progresslist);
-
-        if (mProgressListView == null) {
-            throw new RuntimeException("Your content must have a ProgressListView whose id "
-                    + "attribute is 'co.bitcode.android.R.id.progresslist'");
+        /**
+         * Get ListView.
+         * 
+         * @since 0.0.1
+         */
+        @Override
+        public ListView getListView ()
+        {
+                return mProgressListView.getListView ();
         }
-    }
+
+        /**
+         * Get {@link ProgressListView}.
+         * 
+         * @return the {@link ProgressListView}
+         * @since 0.0.1
+         */
+        public ProgressListView getProgressListView ()
+        {
+                return mProgressListView;
+        }
+
+        /**
+         * Hide the progress indicator.
+         * 
+         * @since 0.0.1
+         */
+        public void hideIndicator ()
+        {
+                mProgressListView.hideIndicator ();
+        }
+
+        /**
+         * Show the progress indicator.
+         * 
+         * @since 0.0.1
+         */
+        public void showIndicator ()
+        {
+                mProgressListView.showIndicator ();
+        }
+
+        /**
+         * Makes sure that subclasses have defined progresslist.
+         */
+        @Override
+        protected void onStart ()
+        {
+                super.onStart ();
+
+                mProgressListView = ( ProgressListView ) findViewById ( R.id.progresslist );
+
+                if ( mProgressListView == null )
+                {
+                        throw new RuntimeException ( "Your content must have a ProgressListView whose id "
+                                        + "attribute is 'co.bitcode.android.R.id.progresslist'" );
+                }
+        }
 }

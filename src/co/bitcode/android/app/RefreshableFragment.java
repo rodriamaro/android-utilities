@@ -30,39 +30,44 @@ import co.bitcode.android.Refreshable;
  * @author Lorenzo Villani
  * @since 0.0.1
  */
-public abstract class RefreshableFragment extends ListFragment implements Refreshable {
-    /**
-     * Creates an options menu which contains the "Refresh" entry.
-     */
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+public abstract class RefreshableFragment extends ListFragment implements Refreshable
+{
+        /**
+         * Creates an options menu which contains the "Refresh" entry.
+         */
+        @Override
+        public void onCreateOptionsMenu ( Menu menu, MenuInflater inflater )
+        {
+                super.onCreateOptionsMenu ( menu, inflater );
 
-        inflater.inflate(R.menu.activity_refreshable, menu);
-    }
-
-    /**
-     * Handles user-initiated refreshes.
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.fragment_menu_refresh:
-            refresh(true);
-
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
+                inflater.inflate ( R.menu.activity_refreshable, menu );
         }
-    }
 
-    /**
-     * Performs initial refresh.
-     */
-    @Override
-    public void onStart() {
-        super.onStart();
+        /**
+         * Handles user-initiated refreshes.
+         */
+        @Override
+        public boolean onOptionsItemSelected ( MenuItem item )
+        {
+                switch ( item.getItemId () )
+                {
+                case R.id.fragment_menu_refresh:
+                        refresh ( true );
 
-        refresh(true);
-    }
+                        return true;
+                default:
+                        return super.onOptionsItemSelected ( item );
+                }
+        }
+
+        /**
+         * Performs initial refresh.
+         */
+        @Override
+        public void onStart ()
+        {
+                super.onStart ();
+
+                refresh ( true );
+        }
 }

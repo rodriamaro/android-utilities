@@ -28,100 +28,123 @@ import co.bitcode.android.R;
 import co.bitcode.android.util.ISODateFormatter;
 
 /**
- * Interprets an ISO Date string and shows it as a fuzzy string such as "few moments ago",
- * "one hour ago", etc.
+ * Interprets an ISO Date string and shows it as a fuzzy string such as "few moments ago", "one hour ago", etc.
  * 
  * @since 0.0.1
  * @author Lorenzo Villani
  */
-public class FuzzyDateView extends TextView {
-    private Date mStartDate;
+public class FuzzyDateView extends TextView
+{
+        private Date mStartDate;
 
-    private static final int SECOND = 1000;
-    private static final int MINUTE = 60 * SECOND;
-    private static final int HOUR = 60 * MINUTE;
-    private static final int DAY = 24 * HOUR;
-    private static final int WEEK = 7 * DAY;
+        private static final int SECOND = 1000;
+        private static final int MINUTE = 60 * SECOND;
+        private static final int HOUR = 60 * MINUTE;
+        private static final int DAY = 24 * HOUR;
+        private static final int WEEK = 7 * DAY;
 
-    /**
-     * @param context
-     * @param attrs
-     * @since 0.0.1
-     */
-    public FuzzyDateView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    /**
-     * Refreshes the fuzzy date string.
-     * 
-     * @since 0.0.1
-     */
-    public void refresh() {
-        if (mStartDate != null) {
-            setText(mStartDate);
+        /**
+         * @param context
+         * @param attrs
+         * @since 0.0.1
+         */
+        public FuzzyDateView ( Context context, AttributeSet attrs )
+        {
+                super ( context, attrs );
         }
-    }
 
-    /**
-     * Shows the fuzzy date string.
-     * 
-     * @param sourceDate Starting date.
-     * @since 0.0.1
-     */
-    public void setText(Date sourceDate) {
-        long difference;
-
-        difference = Math.abs(new Date().getTime() - sourceDate.getTime());
-
-        if (difference < 59 * SECOND) {
-            // Moments ago
-            super.setText(getContext().getString(R.string.fuzzydateview_momentsAgoLabel));
-        } else if (difference < 2 * MINUTE) {
-            // One minute ago
-            super.setText(getContext().getString(R.string.fuzzydateview_oneMinuteAgoLabel));
-        } else if (difference < HOUR) {
-            // X minutes ago
-            super.setText(String.format(
-                    getContext().getString(R.string.fuzzydateview_minutesAgoFormat),
-                    (int) difference / MINUTE));
-        } else if (difference < 2 * HOUR) {
-            // One hour ago
-            super.setText(getContext().getString(R.string.fuzzydateview_oneHourAgoLabel));
-        } else if (difference < DAY) {
-            // X hours ago
-            super.setText(String.format(
-                    getContext().getString(R.string.fuzzydateview_hoursAgoFormat), (int) difference
-                            / HOUR));
-        } else if (difference < 2 * DAY) {
-            // One day ago
-            super.setText(getContext().getString(R.string.fuzzydateview_oneDayAgoLabel));
-        } else if (difference < WEEK) {
-            // X days ago
-            super.setText(String.format(getContext()
-                    .getString(R.string.fuzzydateview_daysAgoFormat), (int) difference / DAY));
-        } else {
-            super.setText(DateUtils.formatDateTime(getContext(), sourceDate.getTime(),
-                    DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME));
+        /**
+         * Refreshes the fuzzy date string.
+         * 
+         * @since 0.0.1
+         */
+        public void refresh ()
+        {
+                if ( mStartDate != null )
+                {
+                        setText ( mStartDate );
+                }
         }
-    }
 
-    /**
-     * Shows the fuzzy date string.
-     * 
-     * @param isoDate ISO Date and Time string.
-     * @throws ParseException
-     * @since 0.0.1
-     */
-    public void setText(String isoDate) throws ParseException {
-        setText(ISODateFormatter.parseISODateAndTime(isoDate));
-    }
+        /**
+         * Shows the fuzzy date string.
+         * 
+         * @param sourceDate Starting date.
+         * @since 0.0.1
+         */
+        public void setText ( Date sourceDate )
+        {
+                long difference;
 
-    public Date getStartDate() {
-        return mStartDate;
-    }
+                difference = Math.abs ( new Date ().getTime () - sourceDate.getTime () );
 
-    public void setStartDate(Date startDate) {
-        mStartDate = startDate;
-    }
+                if ( difference < 59 * SECOND )
+                {
+                        // Moments ago
+                        super.setText ( getContext ().getString ( R.string.fuzzydateview_momentsAgoLabel ) );
+                }
+                else if ( difference < 2 * MINUTE )
+                {
+                        // One minute ago
+                        super.setText ( getContext ().getString ( R.string.fuzzydateview_oneMinuteAgoLabel ) );
+                }
+                else if ( difference < HOUR )
+                {
+                        // X minutes ago
+                        super.setText ( String.format (
+                                        getContext ().getString ( R.string.fuzzydateview_minutesAgoFormat ),
+                                        ( int ) difference / MINUTE ) );
+                }
+                else if ( difference < 2 * HOUR )
+                {
+                        // One hour ago
+                        super.setText ( getContext ().getString ( R.string.fuzzydateview_oneHourAgoLabel ) );
+                }
+                else if ( difference < DAY )
+                {
+                        // X hours ago
+                        super.setText ( String
+                                        .format ( getContext ().getString ( R.string.fuzzydateview_hoursAgoFormat ),
+                                                        ( int ) difference / HOUR ) );
+                }
+                else if ( difference < 2 * DAY )
+                {
+                        // One day ago
+                        super.setText ( getContext ().getString ( R.string.fuzzydateview_oneDayAgoLabel ) );
+                }
+                else if ( difference < WEEK )
+                {
+                        // X days ago
+                        super.setText ( String.format (
+                                        getContext ().getString ( R.string.fuzzydateview_daysAgoFormat ),
+                                        ( int ) difference / DAY ) );
+                }
+                else
+                {
+                        super.setText ( DateUtils.formatDateTime ( getContext (), sourceDate.getTime (),
+                                        DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME ) );
+                }
+        }
+
+        /**
+         * Shows the fuzzy date string.
+         * 
+         * @param isoDate ISO Date and Time string.
+         * @throws ParseException
+         * @since 0.0.1
+         */
+        public void setText ( String isoDate ) throws ParseException
+        {
+                setText ( ISODateFormatter.parseISODateAndTime ( isoDate ) );
+        }
+
+        public Date getStartDate ()
+        {
+                return mStartDate;
+        }
+
+        public void setStartDate ( Date startDate )
+        {
+                mStartDate = startDate;
+        }
 }

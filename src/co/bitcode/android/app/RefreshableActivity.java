@@ -30,49 +30,56 @@ import co.bitcode.android.Refreshable;
  * @since 0.0.1
  * @author Lorenzo Villani
  */
-public abstract class RefreshableActivity extends Activity implements Refreshable {
-    private boolean mFirstTime;
+public abstract class RefreshableActivity extends Activity implements Refreshable
+{
+        private boolean mFirstTime;
 
-    public RefreshableActivity() {
-        super();
+        public RefreshableActivity ()
+        {
+                super ();
 
-        mFirstTime = true;
-    }
-
-    /**
-     * Inflates the options menu.
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_refreshable, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    /**
-     * Handles click on "Refresh" menu entry.
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.activity_menu_refresh:
-            refresh(true);
-
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
+                mFirstTime = true;
         }
-    }
 
-    /**
-     * Invokes {@link #refresh(boolean)} the first time this Activity is shown.
-     */
-    @Override
-    protected void onResume() {
-        super.onResume();
+        /**
+         * Inflates the options menu.
+         */
+        @Override
+        public boolean onCreateOptionsMenu ( Menu menu )
+        {
+                getMenuInflater ().inflate ( R.menu.activity_refreshable, menu );
 
-        if (mFirstTime) {
-            refresh(true);
+                return super.onCreateOptionsMenu ( menu );
         }
-    }
+
+        /**
+         * Handles click on "Refresh" menu entry.
+         */
+        @Override
+        public boolean onOptionsItemSelected ( MenuItem item )
+        {
+                switch ( item.getItemId () )
+                {
+                case R.id.activity_menu_refresh:
+                        refresh ( true );
+
+                        return true;
+                default:
+                        return super.onOptionsItemSelected ( item );
+                }
+        }
+
+        /**
+         * Invokes {@link #refresh(boolean)} the first time this Activity is shown.
+         */
+        @Override
+        protected void onResume ()
+        {
+                super.onResume ();
+
+                if ( mFirstTime )
+                {
+                        refresh ( true );
+                }
+        }
 }

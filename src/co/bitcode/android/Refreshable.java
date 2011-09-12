@@ -22,6 +22,7 @@ package co.bitcode.android;
  * @author Lorenzo Villani
  * @since 0.0.1
  */
-public interface Refreshable {
-    public void refresh(boolean forced);
+public interface Refreshable
+{
+        public void refresh ( boolean forced );
 }

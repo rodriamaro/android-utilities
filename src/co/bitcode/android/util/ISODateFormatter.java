@@ -28,60 +28,66 @@ import java.util.TimeZone;
  * @since 0.0.1
  * @author Lorenzo Villani
  */
-public class ISODateFormatter {
-    /**
-     * Pattern used to convert from/to ISO Date format
-     */
-    public static final DateFormat ISO_FORMAT = new SimpleDateFormat("yyyyMMdd");
+public class ISODateFormatter
+{
+        /**
+         * Pattern used to convert from/to ISO Date format
+         */
+        public static final DateFormat ISO_FORMAT = new SimpleDateFormat ( "yyyyMMdd" );
 
-    /**
-     * Pattern used to convert from/to ISO Date And Time format.
-     */
-    public static final DateFormat ISO_FULL_FORMAT = new SimpleDateFormat("yyyyMMddhhmmss");
+        /**
+         * Pattern used to convert from/to ISO Date And Time format.
+         */
+        public static final DateFormat ISO_FULL_FORMAT = new SimpleDateFormat ( "yyyyMMddhhmmss" );
 
-    static {
-        ISO_FULL_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
-    }
+        static
+        {
+                ISO_FULL_FORMAT.setTimeZone ( TimeZone.getTimeZone ( "UTC" ) );
+        }
 
-    /**
-     * @param date Date to format
-     * @return Full ISO Date (date + time)
-     * @since 0.0.1
-     */
-    public static String format(Date date) {
-        return ISO_FULL_FORMAT.format(date);
-    }
+        /**
+         * @param date Date to format
+         * @return Full ISO Date (date + time)
+         * @since 0.0.1
+         */
+        public static String format ( Date date )
+        {
+                return ISO_FULL_FORMAT.format ( date );
+        }
 
-    /**
-     * @param date Date to format
-     * @return ISO Date (only date)
-     * @since 0.0.1
-     */
-    public static String formatDate(Date date) {
-        return ISO_FORMAT.format(date);
-    }
+        /**
+         * @param date Date to format
+         * @return ISO Date (only date)
+         * @since 0.0.1
+         */
+        public static String formatDate ( Date date )
+        {
+                return ISO_FORMAT.format ( date );
+        }
 
-    /**
-     * Parse an ISO Date from a String.
-     * 
-     * @param date ISO Date string.
-     * @return {@link java.util.Date} object
-     * @throws ParseException
-     * @since 0.0.1
-     */
-    public static Date parseISODate(String date) throws ParseException {
-        return ISO_FORMAT.parse(date);
-    }
+        /**
+         * Parse an ISO Date from a String.
+         * 
+         * @param date ISO Date string.
+         * @return {@link java.util.Date} object
+         * @throws ParseException
+         * @since 0.0.1
+         */
+        public static Date parseISODate ( String date ) throws ParseException
+        {
+                return ISO_FORMAT.parse ( date );
+        }
 
-    /**
-     * Parse ISO Date and Time from a String.
-     * 
-     * @param dateAndTime ISO Date and Time string
-     * @return {@link java.util.Date} object
-     * @throws ParseException
-     * @since 0.0.1
-     */
-    public static Date parseISODateAndTime(String dateAndTime) throws ParseException {
-        return ISO_FULL_FORMAT.parse(dateAndTime);
-    }
+        /**
+         * Parse ISO Date and Time from a String.
+         * 
+         * @param dateAndTime ISO Date and Time string
+         * @return {@link java.util.Date} object
+         * @throws ParseException
+         * @since 0.0.1
+         */
+        public static Date parseISODateAndTime ( String dateAndTime ) throws ParseException
+        {
+                return ISO_FULL_FORMAT.parse ( dateAndTime );
+        }
 }
