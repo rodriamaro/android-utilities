@@ -16,13 +16,6 @@
 
 package co.bitcode.android;
 
-import java.util.List;
-
-import android.app.ActivityManager;
-import android.app.ActivityManager.RunningAppProcessInfo;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 
 /**
  * Extends {@link android.app.Application} to provide utility methods.
@@ -30,53 +23,20 @@ import android.content.pm.PackageManager.NameNotFoundException;
  * @author Lorenzo Villani
  * @since 0.0.1
  */
-public abstract class Application extends android.app.Application {
-    /**
-     * Gets current application version name as specified in <code>AndroidManifest.xml</code>.
-     * 
-     * @return Application versionName string.
-     * @since 0.0.1
-     */
-    public String getVersionName() {
-        try {
-            return getPackageManager().getPackageInfo(getApplicationInfo().packageName, 0).versionName;
-        } catch (NameNotFoundException ex) {
-            throw new RuntimeException("Unable to find versionName for this application, "
-                    + "this shouldn't happen!", ex);
-        }
-    }
+public abstract class Application extends android.app.Application
+{
+        private static Application instance;
 
-    /**
-     * Determines if this application is currently being shown to the user.
-     * 
-     * @return true if we are running in the foreground, false otherwise.
-     * @since 0.0.1
-     */
-    public boolean isForeground() {
-        ActivityManager activityManager;
-        List<RunningAppProcessInfo> runningAppProcesses;
+        @Override
+        public void onCreate ()
+        {
+                super.onCreate ();
 
-        activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-
-        runningAppProcesses = activityManager.getRunningAppProcesses();
-
-        for (RunningAppProcessInfo processInfo : runningAppProcesses) {
-            if (processInfo.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
-                try {
-                    ApplicationInfo applicationInfo;
-
-                    applicationInfo = getPackageManager().getApplicationInfo(
-                            processInfo.processName, PackageManager.GET_META_DATA);
-
-                    if (applicationInfo.packageName.equals(getPackageName())) {
-                        return true;
-                    }
-                } catch (NameNotFoundException ex) {
-                    return false;
-                }
-            }
+                instance = this;
         }
 
-        return false;
-    }
+        public static Application getInstance ()
+        {
+                return instance;
+        }
 }
