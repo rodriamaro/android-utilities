@@ -27,6 +27,10 @@ import android.widget.ArrayAdapter;
  */
 public class DifferentialArrayAdapter < T > extends ArrayAdapter < T >
 {
+        // -------------------------------------------------------------------------------------------------------------
+        // Public Constructors
+        // -------------------------------------------------------------------------------------------------------------
+
         /**
          * Constructor.
          * 
@@ -100,6 +104,10 @@ public class DifferentialArrayAdapter < T > extends ArrayAdapter < T >
                 super ( context, resource, textViewResourceId, objects );
         }
 
+        // -------------------------------------------------------------------------------------------------------------
+        // Public Methods
+        // -------------------------------------------------------------------------------------------------------------
+
         /**
          * Updates this list view. <strong>O(n<sup>2</sup>) ahead! You've been warned.</strong>
          * 
@@ -124,6 +132,10 @@ public class DifferentialArrayAdapter < T > extends ArrayAdapter < T >
                         }
                 }
         }
+
+        // -------------------------------------------------------------------------------------------------------------
+        // Private Methods
+        // -------------------------------------------------------------------------------------------------------------
 
         /**
          * Find element position (if any).
