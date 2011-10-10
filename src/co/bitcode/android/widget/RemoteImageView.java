@@ -29,13 +29,21 @@ import android.widget.ImageView;
  * @author Lorenzo Villani
  * @since 0.0.1
  */
-public abstract class RemoteImageView extends ImageView
+public abstract class RemoteImageView extends RoundedCornerImageView
 {
+        // -------------------------------------------------------------------------------------------------------------
+        // Protected Constants
+        // -------------------------------------------------------------------------------------------------------------
+
         /**
          * Use this as a return value with {@link #getMissingDrawable()} and {@link #getLoadingDrawable()} in case you
          * don't want to change our current bitmap.
          */
         protected static final int NO_PICTURE = -1;
+
+        // -------------------------------------------------------------------------------------------------------------
+        // Public Constructors
+        // -------------------------------------------------------------------------------------------------------------
 
         /**
          * @param context
@@ -67,9 +75,10 @@ public abstract class RemoteImageView extends ImageView
                 super ( context, attrs, defStyle );
         }
 
-        //
-        // Getters and Setters
-        //
+        // -------------------------------------------------------------------------------------------------------------
+        // Public Methods
+        // -------------------------------------------------------------------------------------------------------------
+
         /**
          * Triggers an asynchronous image download.
          * 
@@ -81,6 +90,7 @@ public abstract class RemoteImageView extends ImageView
         {
                 new AsyncTask < Uri, Void, Bitmap > ()
                 {
+                        @Override
                         protected void onPreExecute ()
                         {
                                 int loadingDrawable;
@@ -93,6 +103,7 @@ public abstract class RemoteImageView extends ImageView
                                 }
                         };
 
+                        @Override
                         protected Bitmap doInBackground ( Uri ... params )
                         {
                                 if ( params != null )
@@ -105,6 +116,7 @@ public abstract class RemoteImageView extends ImageView
                                 }
                         };
 
+                        @Override
                         protected void onPostExecute ( Bitmap result )
                         {
                                 if ( result != null )
@@ -125,6 +137,10 @@ public abstract class RemoteImageView extends ImageView
                         };
                 }.execute ( uri );
         }
+
+        // -------------------------------------------------------------------------------------------------------------
+        // Protected Methods
+        // -------------------------------------------------------------------------------------------------------------
 
         /**
          * This method is invoked when there's a need to download a picture from the network.
