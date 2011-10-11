@@ -18,6 +18,8 @@ package co.bitcode.android.app;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 
 import co.bitcode.android.R;
 
@@ -27,8 +29,12 @@ import co.bitcode.android.R;
  * @author Lorenzo Villani
  * @since 0.0.1
  */
-public class ErrorDialog extends AlertDialog
+public class ErrorDialog extends AlertDialog implements OnClickListener
 {
+        // -------------------------------------------------------------------------------------------------------------
+        // Public Constructors
+        // -------------------------------------------------------------------------------------------------------------
+
         /**
          * Construct an error dialog.
          * 
@@ -40,7 +46,6 @@ public class ErrorDialog extends AlertDialog
                 super ( context );
 
                 init ();
-
                 setMessage ( message );
         }
 
@@ -55,17 +60,32 @@ public class ErrorDialog extends AlertDialog
                 super ( context );
 
                 init ();
-
                 setMessage ( context.getResources ().getString ( messageId ) );
         }
+
+        // -------------------------------------------------------------------------------------------------------------
+        // Public Methods
+        // -------------------------------------------------------------------------------------------------------------
+
+        @Override
+        public void onClick ( DialogInterface dialog, int which )
+        {
+                dismiss ();
+        }
+
+        // -------------------------------------------------------------------------------------------------------------
+        // Private Methods
+        // -------------------------------------------------------------------------------------------------------------
 
         /**
          * Common initialization code.
          */
         private void init ()
         {
+                setButton ( BUTTON_POSITIVE, getContext ().getString ( android.R.string.ok ), this );
+                setCancelable ( true );
                 setIcon ( android.R.drawable.ic_dialog_alert );
-
                 setTitle ( R.string.dialog_error_title );
         }
+
 }
