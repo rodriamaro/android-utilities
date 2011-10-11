@@ -19,9 +19,10 @@ package co.bitcode.android.widget;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+
+import co.bitcode.android.os.AsyncTask;
 
 /**
  * An {@link ImageView} which downloads a picture from the network and displays it when done.
@@ -88,11 +89,13 @@ public abstract class RemoteImageView extends RoundedCornerImageView
         @Override
         public void setImageURI ( Uri uri )
         {
-                new AsyncTask < Uri, Void, Bitmap > ()
+                new AsyncTask < Uri, Bitmap > ()
                 {
                         @Override
-                        protected void onPreExecute ()
+                        protected void onStart ()
                         {
+                                super.onStart ();
+
                                 int loadingDrawable;
 
                                 loadingDrawable = getLoadingDrawable ();
@@ -101,10 +104,10 @@ public abstract class RemoteImageView extends RoundedCornerImageView
                                 {
                                         setImageResource ( loadingDrawable );
                                 }
-                        };
+                        }
 
                         @Override
-                        protected Bitmap doInBackground ( Uri ... params )
+                        protected Bitmap doInBackground ( Uri ... params ) throws Exception
                         {
                                 if ( params != null )
                                 {
@@ -114,11 +117,13 @@ public abstract class RemoteImageView extends RoundedCornerImageView
                                 {
                                         return null;
                                 }
-                        };
+                        }
 
                         @Override
-                        protected void onPostExecute ( Bitmap result )
+                        protected void onFinish ( Bitmap result )
                         {
+                                super.onFinish ( result );
+
                                 if ( result != null )
                                 {
                                         setImageBitmap ( result );
@@ -134,7 +139,7 @@ public abstract class RemoteImageView extends RoundedCornerImageView
                                                 setImageResource ( missingDrawable );
                                         }
                                 }
-                        };
+                        }
                 }.execute ( uri );
         }
 
